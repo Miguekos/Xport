@@ -1,0 +1,5 @@
+person
+ALTER TABLE `person` ADD `deuda` VARCHAR(100) NOT NULL AFTER `dni`;
+
+cliente
+ALTER TABLE `cliente` ADD `contrato` INT(10) NOT NULL AFTER `atendido`;
