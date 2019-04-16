@@ -89,7 +89,7 @@ mysqli_select_db($con,"sd");
     //Se conecta a la base de datos y busca poor ID o DNI y el resultado lo guarda en un arreglo
     mysqli_select_db($con,"");
     // $sql="SELECT * FROM `cliente` WHERE id = '".$q."' or dni = '".$q."'";
-    $sql="SELECT * FROM `cliente` WHERE dni = '".$q."'";
+    $sql="SELECT * FROM `cliente` WHERE dni = '".$q."' order by id DESC";
     // echo $sql;
     $result = mysqli_query($con,$sql);
     $row = mysqli_fetch_array($result);
@@ -102,7 +102,7 @@ mysqli_select_db($con,"sd");
 
     if ($idd !== null) {
         // $sql="SELECT * FROM `cliente` WHERE id = '".$q."' or dni = '".$q."'";
-        $sql="SELECT * FROM `cliente` WHERE dni = '".$q."'";
+        $sql="SELECT * FROM `cliente` WHERE dni = '".$q."' order by id DESC";
         //print_r($sql);
         $result = mysqli_query($con,$sql);
         while($row = mysqli_fetch_array($result)) {
@@ -159,10 +159,12 @@ mysqli_select_db($con,"sd");
                     $sql1="INSERT INTO `assistance`(`kind_id`, `date_at`, `person_id`, `user_id`, `total_asis`,`create_at`,`deuda`,`vencimiento`) VALUES ('1','$fee','$idd','$user_id','0','$date',0,0)";
                     $result1 = mysqli_query($con,$sql1);
                     $color = "asistio";
+                    $sonido = "";
                 }else {
                     $sql1="INSERT INTO `assistance`(`kind_id`, `date_at`, `person_id`, `user_id`, `total_asis`,`create_at`,`deuda`,`vencimiento`) VALUES ('1','$fee','$idd','$user_id','0','$date',0,1)";
                     $result1 = mysqli_query($con,$sql1);
                     $color = "borro";
+                    $sonido = "<embed src='/custom/alert.mp3' autostart='true' loop='true' volume='80' width='0' height='0'>";
                 };
               // echo "<iframe src='prueba.php' width='300' height='300'>aqui esta</iframe>";
             }else {
@@ -170,13 +172,16 @@ mysqli_select_db($con,"sd");
                     $sql1="INSERT INTO `assistance`(`kind_id`, `date_at`, `person_id`, `user_id`, `total_asis`,`create_at`,`deuda`,`vencimiento`) VALUES ('1','$fee','$idd','$user_id','0','$date',1,0)";
                     $result1 = mysqli_query($con,$sql1);
                     $color = "borro";
+                    $sonido = "<embed src='/custom/alert.mp3' autostart='true' loop='true' volume='80' width='0' height='0'>";
                 }else {
                     $sql1="INSERT INTO `assistance`(`kind_id`, `date_at`, `person_id`, `user_id`, `total_asis`,`create_at`,`deuda`,`vencimiento`) VALUES ('1','$fee','$idd','$user_id','0','$date',1,1)";
                     $result1 = mysqli_query($con,$sql1);
                     $color = "borro";
+                    $sonido = "<embed src='/custom/alert.mp3' autostart='true' loop='true' volume='80' width='0' height='0'>";
                 };
             }
 
+            echo $sonido;
             echo "<div class='row'>";
             echo "<div class='col-lg-3'>";
             echo "</div>";

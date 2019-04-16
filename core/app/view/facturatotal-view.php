@@ -2,21 +2,21 @@
 
 // if( isset($_POST) )
 // {
-//     $fecha_i = $_POST['fecha1'];
-//     $fecha_f = $_POST['fecha2'];    
+$fecha_i = $_POST['fecha1'];
+// echo $fecha_i;
+//     $fecha_f = $_POST['fecha2'];
 // }
 
 include 'Database.php';
-$fecha2 = $GLOBALS['fecha'];
 ?>
 
 <section class="content" style="padding-top: 0px; padding-bottom: 0px;">
     <section class="content-header" style="padding-bottom: 5px;">
-        
+        <button color="red" onclick="atras()" class="btn">Atras</button> <span style="font-size: 24px;" class="pull-right">Reporte del dia: <?php echo $fecha_i; ?></span>
         <div class="row">
             <?php
-            $sql = "SELECT nombre, SUM(cantidad) cantidad, SUM(total) total FROM ventas WHERE hora LIKE '%$fecha2%' GROUP BY nombre limit 500";
-            $sql_sumatotal = "select SUM(total) totalsum FROM ventas WHERE hora LIKE '%$fecha2%'";
+            $sql = "SELECT nombre, SUM(cantidad) cantidad, SUM(total) total FROM ventas WHERE hora LIKE '%$fecha_i%' GROUP BY nombre limit 500";
+            $sql_sumatotal = "select SUM(total) totalsum FROM ventas WHERE hora LIKE '%$fecha_i%'";
             $result = mysqli_query($con, $sql);
             $result_sum_total = mysqli_query($con, $sql_sumatotal);
             $total_sum = mysqli_fetch_object($result_sum_total);
@@ -63,8 +63,8 @@ $fecha2 = $GLOBALS['fecha'];
 
             <!--Aqui va la nueva tabla de ventas-->
             <?php
-            $sql = "SELECT * FROM abonos WHERE fecha_abono LIKE '%$fecha2%'";
-            $sql_total_abono = "SELECT SUM(abono) abono FROM abonos WHERE fecha_abono LIKE '%$fecha2%'";
+            $sql = "SELECT * FROM abonos WHERE fecha_abono LIKE '%$fecha_i%'";
+            $sql_total_abono = "SELECT SUM(abono) abono FROM abonos WHERE fecha_abono LIKE '%$fecha_i%'";
             $result = mysqli_query($con, $sql);
             $result_abono = mysqli_query($con, $sql_total_abono);
             $total_abono = mysqli_fetch_object($result_abono);
@@ -114,19 +114,20 @@ $fecha2 = $GLOBALS['fecha'];
             <?php
             $sql = "SELECT *
             FROM control
-            WHERE hora LIKE '%2$fecha2%'";
+            WHERE hora LIKE '%$fecha_i%'";
             $sql_retiro = "SELECT SUM(cajachica) retiro
             FROM control
-            WHERE accion = 'retiro' and hora LIKE '%2$fecha2%'";
+            WHERE accion = 'retiro' and hora LIKE '%$fecha_i%'";
             $sql_deposito = "SELECT SUM(cajachica) deposito
             FROM control
-            WHERE accion = 'deposito' and hora LIKE '%2$fecha2%'";
+            WHERE accion = 'deposito' and hora LIKE '%$fecha_i%'";
             $result = mysqli_query($con, $sql);
             $result_sum_retiro = mysqli_query($con, $sql_retiro);
             $result_sum_deposito = mysqli_query($con, $sql_deposito);
             $total_retiro = mysqli_fetch_object($result_sum_retiro);
             $total_deposito = mysqli_fetch_object($result_sum_deposito);
-            $totalcaja = $total_retiro->retiro - $total_deposito->deposito;
+            // $totalcaja = $total_retiro->retiro - $total_deposito->deposito;
+            $totalcaja = $total_deposito->deposito - $total_retiro->retiro;
             //    echo $total_sum->totalsum;
             ?>
             <!--Aqui va la nueva tabla de ventas-->
@@ -175,19 +176,20 @@ $fecha2 = $GLOBALS['fecha'];
             <?php
             $sql = "SELECT *
             FROM gastos
-            WHERE hora LIKE '%2$fecha2%'";
+            WHERE hora LIKE '%$fecha_i%'";
             $sql_retiro = "SELECT SUM(gastos) retiro
             FROM gastos
-            WHERE accion = 'retiro' and hora LIKE '%2$fecha2%'";
+            WHERE accion = 'retiro' and hora LIKE '%$fecha_i%'";
             $sql_deposito = "SELECT SUM(gastos) deposito
             FROM gastos
-            WHERE accion = 'deposito' and hora LIKE '%2$fecha2%'";
+            WHERE accion = 'deposito' and hora LIKE '%$fecha_i%'";
             $result = mysqli_query($con, $sql);
             $result_sum_retiro = mysqli_query($con, $sql_retiro);
             $result_sum_deposito = mysqli_query($con, $sql_deposito);
             $total_retiro = mysqli_fetch_object($result_sum_retiro);
             $total_deposito = mysqli_fetch_object($result_sum_deposito);
-            $totalgastos = $total_retiro->retiro - $total_deposito->deposito;
+            // $totalgastos = $total_retiro->retiro - $total_deposito->deposito;
+            $totalgastos = $total_deposito->deposito - $total_retiro->retiro;
             //    echo $total_sum->totalsum;
 
             ?>
@@ -216,7 +218,6 @@ $fecha2 = $GLOBALS['fecha'];
                                         <td style="color: <?php echo $color; ?>"><?= $gasto->motivo; ?></td>
                                         <td style="color: <?php echo $color; ?>"><?= $gasto->gastos; ?></td>
                                     </tr>
-
                                 <?php } ?>
                             <tfoot>
                                 <tr>
@@ -230,46 +231,47 @@ $fecha2 = $GLOBALS['fecha'];
                     </div>
                 </div>
             </div>
-        
 
-        <div class="row col-lg-12">
+            <div class="row col-lg-12">
 
-            <div class="col-lg-3">
-                <div class=" box box-warning">
-                    <div class="box-body">
-                        Facturas: <span class="pull-right"><b><?php echo $total_sum->totalsum; ?></b> .S/</span>
+                <div class="col-lg-3">
+                    <div class=" box box-warning">
+                        <div class="box-body">
+                            Facturas: <span class="pull-right"><b><?php echo $total_sum->totalsum; ?></b> .S/</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class=" box box-warning">
+                        <div class="box-body">
+                            Ventas <span class="pull-right"><b><?php echo $total_abono->abono; ?></b> .S/</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class=" box box-warning">
+                        <div class="box-body">
+                            Caja Chica <span class="pull-right"><b><?php echo $totalcaja; ?></b> .S/</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class=" box box-warning">
+                        <div class="box-body">
+                            Gastos Varios <span class="pull-right"><b><?php echo $totalgastos; ?></b> .S/</span>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3">
-                <div class=" box box-warning">
-                    <div class="box-body">
-                        Ventas <span class="pull-right"><b><?php echo $total_abono->abono; ?></b> .S/</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class=" box box-warning">
-                    <div class="box-body">
-                        Caja Chica <span class="pull-right"><b><?php echo $totalcaja; ?></b> .S/</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class=" box box-warning">
-                    <div class="box-body">
-                        Gastos Varios <span class="pull-right"><b><?php echo $totalgastos; ?></b> .S/</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
         </div>
     </section>
 </section>
 
-<!-- /.row -->
+<script>
+    function atras() {
+        window.location.href = "./?view=filtroporfecha";
+    }
+</script>
