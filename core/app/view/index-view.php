@@ -62,11 +62,12 @@ $asd = mysqli_fetch_row($total_b);
 $zxc = $asd[0];
 
 //Declaracion de variable para usar de forma mas comoda el LIKE en mysql
-$fechaM = $fcs1."%";
+// $fechaM = $fcs1."%";
+$fechaM = $fecha."%";
 
 //Si no existe asistencia actual crea una
 if ($zxc===null) {
-    $query4  = "SELECT COUNT(*) FROM assistance WHERE date_at LIKE '$fechaM'";
+    $query4  = "SELECT COUNT(*) FROM assistance WHERE create_at LIKE '$fechaM'";
     $total_a = mysqli_query($conexion, $query4);
     $asd = mysqli_fetch_row($total_a);
     $qwe = $asd[0];
@@ -77,7 +78,7 @@ if ($zxc===null) {
 //Si ya existe actualiza la que esta
 }else{
 
-    $query4  = "SELECT COUNT(*) FROM assistance WHERE date_at LIKE '$fechaM' and kind_id = 1";
+    $query4  = "SELECT COUNT(*) FROM assistance WHERE create_at LIKE '$fechaM' and kind_id = 1";
     $total_a = mysqli_query($conexion, $query4);
     $asd = mysqli_fetch_row($total_a);
     $qwe = $asd[0];
@@ -169,7 +170,7 @@ $max_ven = $registros_max_ven[0];
                                 </div>
                             </div>
                         </div>
-                        <a href="clientes.php">
+                        <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -213,7 +214,7 @@ $max_ven = $registros_max_ven[0];
                                 </div>
                             </div>
                         </div>
-                        <a href="PorVencer.php">
+                        <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -235,7 +236,7 @@ $max_ven = $registros_max_ven[0];
                                 </div>
                             </div>
                         </div>
-                        <a href="deudores.php">
+                        <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">Ver detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

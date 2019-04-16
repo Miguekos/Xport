@@ -1,7 +1,7 @@
 <section class="content" style="padding-top: 0px; padding-bottom: 0px;">
         <section class="content-header" style="padding-bottom: 10px;">
           <h1>
-            Asistencia
+            Reporte
             <small>Control</small>
           </h1>
           <ol class="breadcrumb">
@@ -13,10 +13,10 @@
         
         <div class="row">
             <div class="col-lg-12">
-                <div class="box box-danger">
+                <div class="box box-warning">
                     <div class="box-body">
                       <div class="col-lg-3">
-                        <input type="search" autofocus id="myInput" class="txthotelname form-control" placeholder="Buscar por ID...">
+                        <input type="search" autofocus id="myInput" class="txthotelname form-control" placeholder="Buscar por DNI...">
                       </div>
 
                     </div>

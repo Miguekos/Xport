@@ -3,20 +3,14 @@ class EmpleadosData {
 	public static $tablename = "empleados";
 
 
-	public function EmpleadosData(){
-		$this->id = "";
+	public function __construct(){
 		$this->nombre = "";
-		$this->apellido = "";
 		$this->dni = "";
-		$this->email = "";
-		$this->boleta = "";
-		$this->fecha_inicio = "";
-		$this->fecha_fin = "";
-		$this->created_at = "NOW()";
 	}
 
 	public function add(){
-		$sql = "INSERT INTO empleados (nombre, apellido, domicilio, email, telf, dni, edad, sexo, boleta, membresia, fecha_inicio, fecha_fin, monto, pago, deuda, forma_pago, nota, atendido, contrato, gymxdias) VALUES ('$this->nombre','$this->apellido','$this->domicilio','$this->email','$this->telf','$this->dni','$this->edad','$this->sexo','$this->boleta','$this->membresia','$this->fecha_inicio','$this->fecha_fin','$this->monto','$this->pago','$this->deuda','$this->forma_pago','$this->nota','$this->atendido','$this->contrato','$this->gymxdias')";
+		$sql = "INSERT INTO empleados (nombre, dni, telf, cargo, sueldo, adelantos, nota) VALUES ('$this->nombre','$this->dni','$this->telf','$this->cargo','$this->sueldo','$this->adelantos','$this->nota')";
+		// echo $sql;
 		return Executor::doit($sql);
 	}
 
@@ -42,7 +36,8 @@ class EmpleadosData {
 
 // partiendo de que ya tenemos creado un objecto EmpleadosData previamente utilizamos el contexto
 	public function update(){
-		$sql = "update empleados set `nombre`='$this->nombre',`apellido`='$this->apellido',`domicilio`='$this->domicilio',`email`='$this->email',`telf`='$this->telf',`dni`='$this->dni',`edad`='$this->edad',`sexo`='$this->sexo',`boleta`='$this->boleta',`membresia`='$this->membresia',`fecha_inicio`='$this->fecha_inicio',`fecha_fin`='$this->fecha_fin',`monto`='$this->monto',`pago`='$this->pago',`deuda`='$this->deuda',`forma_pago`='$this->forma_pago',`nota`='$this->nota',`contrato`='$this->contrato',`gymxdias`='$this->gymxdias' where id=$this->id";
+		$sql = "update empleados set `nombre`='$this->nombre',`dni`='$this->dni',`telf`='$this->telf',`cargo`='$this->cargo',`sueldo`='$this->sueldo',`adelantos`='$this->adelantos',`nota`='$this->nota' where id=$this->id";
+		// echo $sql;
 		Executor::doit($sql);
 	}
 

@@ -10,7 +10,7 @@ $server = "localhost";
 //  $db = "lbadmin";
 $name_db = "fitseven_miguel";
 $pass_db = "Alexkos12.";
-$db = "fitseven_lbadmin";
+$db = "fitseven_gymsport";
 
 //Con esto personalizo el nombre del archivo exportado
 date_default_timezone_set('America/Lima');

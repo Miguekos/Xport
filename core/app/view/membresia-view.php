@@ -5,20 +5,20 @@ $data["posts"]=MemData::getAll();
 
                 <section class="content-header" style="padding-bottom: 10px;">
                   <h1>
-                    Membresias
-                    <!-- <a href="./?view=newclient" class="btn btn-success">Agregar</a> -->
+                    Promociones
+                    <a href="./?view=newmembresia" class="btn btn-success">Agregar</a>
                   </h1>
                   <ol class="breadcrumb">
                     <li><a href="./?view=index"><i class="fa fa-dashboard"></i> Inicio</a></li>
                     <!-- <li><a href="#">Examples</a></li> -->
-                    <li class="active">Membresias</li>
+                    <li class="active">Promociones</li>
                   </ol>
                 </section>
                 <!-- Inicio del ROW separa el slide bar del conenido -->
                 <div class="row">
                     <div class="col-lg-12">
                     
-                        <div class="box box-info">
+                        <div class="box box-warning">
                             <div class="box-body">
                                     <table class="table datatable table-bordered table-hover table-striped">
                                         <thead>
@@ -26,7 +26,7 @@ $data["posts"]=MemData::getAll();
                                                 <th style="width: 5%;">ID</th>
                                                 <th>Nombres </th>
                                                 <th style="width: 20%;">Precio</th>
-                                                <th>Tiempo Membresia (Dias)</th>
+                                                <th>Tiempo (Dias)</th>
                                                 <th class="text-center">Agregado Por</th>
                                                 <th class="text-center">Accion</th>
                                             </tr>

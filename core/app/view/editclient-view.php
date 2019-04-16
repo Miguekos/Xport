@@ -24,7 +24,7 @@
                                 <i class="fa fa-asterisk"></i> Editar Cliente
                             </li>
                         </ol>
-                    
+
                 </section>
                 <!-- /.row -->
 
@@ -45,7 +45,7 @@
                                     <label>Membresia</label>
 
 
-                                    <?php 
+                                    <?php
 
                                         // $sql  = "SELECT * FROM membresia";
                                         $sql1  = "SELECT * FROM membresia where id = $user->id";
@@ -72,7 +72,7 @@
                                     <label>Dias</label>
                                     <input type='text' id='tiempo_mem' name='tiempo_mem' class='form-control col-lg-12' value='<?php echo $user->tiempo_mem; ?>'>
                                 </div>
-                                
+
                                 <div class="form-group col-lg-6">
                                     <label>Precio</label>
                                     <input type='text' id='monto' name='monto' class='form-control col-lg-12' value='<?php echo $user->monto; ?>' >
@@ -86,14 +86,14 @@
 
                                 <div class="form-group col-lg-12">
                                     <label>Fecha Inicio*</label>
-                                        <input type="date" value="<?php echo $user->fecha_inicio; ?>" id="fecha_inicio" name="fecha_inicio" class="form-control"> 
+                                        <input type="date" value="<?php echo $user->fecha_inicio; ?>" id="fecha_inicio" name="fecha_inicio" class="form-control">
                                 </div>
                                 <div class="form-group col-lg-12">
                                     <label>Fecha Expiracion*</label>
                                         <input type="date" name="fecha_fin" id="fecha_fin" value="<?php echo $user->fecha_fin; ?>" class="form-control" placeholder="aaaa-mm-dd">
                                 </div>
                                 <div class="form-group col-lg-12">
-                                    <label>Fecha Expiracion*</label>
+                                    <label>Fecha Alerta*</label>
                                         <input type="date" name="fecha_alert" id="fecha_alert" value="<?php echo $user->fecha_alert; ?>" class="form-control" placeholder="aaaa-mm-dd">
                                 </div>
 
@@ -122,34 +122,12 @@
                                     <label>Direccion</label>
                                     <input type="text" name="direccion" class="form-control" value="<?php echo $user->domicilio; ?>" placeholder="Direccion">
                                 </div>
-                               
-                                <div class="form-group col-lg-6">
-                                    <label>Pago del Cliente*</label>
-                                    <input type="text" name="pago" id="pago" class="form-control" onkeyup="operar('restar');" value="<?php echo $user->pago; ?>" placeholder="Pago">
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label>Deuda*</label>
-                                    <input type="text" id="total" name="deuda" class="form-control" readonly value="<?php echo $user->deuda; ?>" placeholder="Deuda">
-                                </div>
-                                
-                                <div class="form-group col-lg-6">
-                                    <label>Forma de pago*</label>
-                                    <select name="forma_pago" class="form-control">
-                                        <option value="<?php echo $user->forma_pago; ?>"><?php echo $user->forma_pago; ?></option>
-                                        <option value="Efectivo">Efectivo</option>
-                                        <option value="Tarjeta de Cedrito">Tarjeta de Cedrito</option>
-                                        <option value="Tarjeta de Debido">Tarjeta de Debido</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label>Contrato N°:</label>
-                                    <input type="text" name="contrato" required class="form-control" value="<?php echo $user->contrato; ?>" placeholder="Numero de Contrato">
-                                </div>
+
                                 <div class="form-group col-lg-6">
                                     <label>Boleta N°:</label>
                                     <input type="text" name="boleta" required class="form-control" value="<?php echo $user->boleta; ?>" placeholder="Numero de Boleta">
                                 </div>
-                                
+
                                 <div class="form-group col-lg-6">
                                     <label>Atendido Por:</label>
                                     <input type="text" readonly value="<?php if(isset($_SESSION["user_id"]) ){ echo UserData::getById($_SESSION["user_id"])->name." ";}{ echo UserData::getById($_SESSION["user_id"])->lastname;} ?>" name="atendido" required class="form-control" placeholder="Nombre">

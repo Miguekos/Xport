@@ -3,19 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <title>Admin | Inicio</title>
-
-    
-
-    
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    
+
 
     <link rel="stylesheet" href="custom/snackbar.css">
-    <link rel="stylesheet" href="custom/w3.css"> 
+    <!-- <link rel="stylesheet" href="custom/w3.css"> -->
     <link rel="stylesheet" href="custom/tooltip.css">
     <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- daterange picker -->
     <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" href="bower_components\bootstrap-datetimepicker\build\css\bootstrap-datetimepicker.css"/>
+
     <!-- Font Awesome Icons -->
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
@@ -38,26 +37,35 @@
     <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css"> -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
 
-          <script src="plugins/jquery/jquery-2.1.4.min.js"></script>
-          <script src="plugins/morris/raphael-min.js"></script>
-          <script src="plugins/morris/morris.js"></script>
-          <link rel="stylesheet" href="plugins/morris/morris.css">
-          <link rel="stylesheet" href="plugins/morris/example.css">
-          <script src="plugins/jspdf/jspdf.min.js"></script>
-          <script src="plugins/jspdf/jspdf.plugin.autotable.js"></script>
-          <!-- highcharts -->         
-          <script src="plugins/highcharts.js"></script>
-          <script src="plugins/exporting.js"></script>
+    <script src="plugins/jquery/jquery-2.1.4.min.js"></script>
+    <script src="plugins/morris/raphael-min.js"></script>
+    <script src="plugins/morris/morris.js"></script>
+    <link rel="stylesheet" href="plugins/morris/morris.css">
+    <link rel="stylesheet" href="plugins/morris/example.css">
+    <script src="plugins/jspdf/jspdf.min.js"></script>
+    <script src="plugins/jspdf/jspdf.plugin.autotable.js"></script>
+    <!-- highcharts -->
+    <script src="plugins/highcharts.js"></script>
+    <script src="plugins/exporting.js"></script>
 
   </head>
+  <style media="screen">
+  .barra {
+    float: left;
+    background-color: transparent;
+    background-image: none;
+    padding: 15px 15px;
+    font-family: fontAwesome;
+}
+</style>
   <?php
-
-
+  include('Database.php');
+  include('totales.php');
    ?>
-  <body class="<?php if(isset($_SESSION["user_id"])):?>sidebar-mini skin-yellow <?php else:?>login-page<?php endif; ?>" >
+  <body class="<?php if(isset($_SESSION["user_id"])):?>sidebar-mini skin-yellow sidebar-collapse <?php else:?>login-page<?php endif; ?>" >
     <div class="wrapper">
       <!-- Main Header -->
       <?php if(isset($_SESSION["user_id"])):?>
@@ -65,9 +73,9 @@
         <!-- Logo -->
         <a href="./" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>G</b>S</span>
+          <span class="logo-mini"><b>G</b> X</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">GYM<b>Sport</b></span>
+          <span class="logo-lg">GYM<b> Xport</b></span>
         </a>
 
         <!-- Header Navbar -->
@@ -76,58 +84,67 @@
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
+
+
+<div class="barra">
+  Total en Caja: <?php echo $total_caja; ?>
+</div>
+
           <!-- Navbar Right Menu -->
+
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-
-
-          <!--<li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-success"><?php echo $GLOBALS['max_deu'] ?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">Tienes <?php echo $GLOBALS['max_deu'] ?> Notificaciones</li>
-              <li>
-                <ul class="menu">
-                  
-                  <li>
-                    <a href="deudores.php">
-                      <i class="fa fa-users text-aqua"></i> <?php echo $GLOBALS['max_deu'] ?> Personas tienen deudas pendientes
-                      <i class="text-aqua"></i> <?php echo $GLOBALS['max_deu'] ?> Personas tienen deudas pendientes
+                <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="label label-success"> <?php echo $total_deudores + $total_vencidos; ?></span>
                     </a>
-                  </li>
-                
-                </ul>
-              </li>
-            </ul>
-          </li>  -->
+                    <ul class="dropdown-menu">
+                        <li class="header">Alertas</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li><!-- start message -->
+                                    <a href="./index.php?view=verasistencia">
+<!--                                        <div class="pull-left">-->
+<!--                                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+<!--                                        </div>-->
+                                        <h4>
+                                            Deudores
+                                            <small><i class="fa fa-clock-o"></i> <?php echo $total_deudores ?> </small>
+                                        </h4>
+                                        <p>Clientes deudores el dia de hoy <?php echo $total_deudores ?></p>
+                                    </a>
+                                </li>
+                                <li><!-- start message -->
+                                    <a href="./index.php?view=verasistencia">
+                                        <div class="pull-left">
+<!--                                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+                                        </div>
+                                        <h4>
+                                            Vencidos
+                                            <small><i class="fa fa-clock-o"></i> <?php echo $total_vencidos ?> </small>
+                                        </h4>
+                                        <p>Clientes vencidos el dia de hoy <?php echo $total_vencidos ?></p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-          <!-- <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-warning"><?php echo $GLOBALS['max_ven'] ?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">Tu tienes <?php echo $GLOBALS['max_ven'] ?> Notificaciones</li>
-              <li>
-                
-                <ul class="menu">
-                  <li>
-                    <a href="PorVencer.php">
-                      <i class="fa fa-users text-aqua"></i> <?php echo $GLOBALS['max_ven'] ?> Vencen este mes
-                    </a>
-                  </li>                 
-                  
-                </ul>
-              </li>
-            </ul>
-          </li> -->
-
+<!--                        <li class="footer"><a href="#">See All Messages</a></li>-->
+                    </ul>
+                </li>
               <!-- User Account Menu -->
             <li class="dropdown user user-menu">
+
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+
+
+
               <img src="dist/img/avatar5.png" class="user-image" alt="User Image">
+
+
               <span class="hidden-xs"><?php if(isset($_SESSION["user_id"]) ){ echo UserData::getById($_SESSION["user_id"])->name." ";}{ echo UserData::getById($_SESSION["user_id"])->lastname;} ?> </span><b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -137,7 +154,7 @@
 
                 <p>
                   <?php if(isset($_SESSION["user_id"]) ){ $kind = UserData::getById($_SESSION["user_id"])->kind;}?>
-                  <?php 
+                  <?php
                   if ($kind == 1) {
                     echo "Administrador";
                     # code...
@@ -175,7 +192,7 @@
             </ul>
           </li>
 
-              
+
               <!-- Control Sidebar Toggle Button -->
             </ul>
           </div>
@@ -189,52 +206,72 @@
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
 
-        
+
             <li class="header text-center">ADMINISTRACION</li>
             <?php if(isset($_SESSION["user_id"])):?>
-              
+
                 <li><a href="./"><i class='fa fa-dashboard'></i> <span>Escritorio</span></a></li>
-                
+
                 <li class="treeview">
                   <a href="#">
                     <i class='fa fa-users'></i>
-                    <span>Clientes</span>
+                    <span>Membresias</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
                     <!-- <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li> -->
-                    <li><a href="./index.php?view=newclient"><i class='fa fa-users'></i> <span>Nuevo Clientes</span></a></li>
-                    <li><a href="./index.php?view=client"><i class='fa fa-users'></i> <span>Clientes</span></a></li>
+                    <!-- <li><a href="./index.php?view=newclient"><i class='fa fa-users'></i> <span>Nueva Membresia</span></a></li> -->
+                    <li><a href="./index.php?view=client"><i class='fa fa-check-square'></i> <span>Membresias</span></a></li>
                     <!-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> -->
-                    <li><a href="./index.php?view=asistencia"><i class='fa fa-check'></i> <span>Asistencia</span></a></li>
-                    <!-- <li><a href="./index.php?view=control"><i class='fa fa-table'></i> <span>Control</span></a></li> -->
-                    <li><a href="./index.php?view=reporte"><i class='fa fa-table'></i> <span>Reporte</span></a></li>
+                    <li><a href="/agregarasistencia.php" target="_blank"><i class='fa fa-check'></i> <span>Asistencia</span></a></li>
+                    <li><a href="./index.php?view=verasistencia"><i class='fa fa-check'></i> <span>Ver Asistencia</span></a></li>
+                    <li><a href="./index.php?view=control"><i class='fa fa-sitemap'></i> <span>Control</span></a></li>
                   </ul>
                 </li>
 
                 <li class="treeview">
                   <a href="#">
-                    <i class='fa fa-users'></i>
-                    <span>Menbresia</span>
+                    <i class='fa fa-star'></i>
+                    <span>Pormociones</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
                     <!-- <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li> -->
-                    <li><a href="./index.php?view=membresia"><i class='fa fa-users'></i> <span>Menbresia</span></a></li>
-                    <li><a href="./index.php?view=newmembresia"><i class='fa fa-users'></i> <span>Nueva Menbresia</span></a></li>
+                    <li><a href="./index.php?view=membresia"><i class='fa fa-check-square'></i> <span>Pormociones</span></a></li>
+                    <!-- <li><a href="./index.php?view=newmembresia"><i class='fa fa-users'></i> <span>Nueva Pormociones</span></a></li> -->
                     <!-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> -->
-                    
+                  </ul>
+                </li>
+
+                <li class="treeview">
+                  <a href="#">
+                    <i class='fa fa-dollar'></i>
+                    <span>Ventas</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="./index.php?view=ventas"><i class='fa fa-check-square'></i> <span>Ventas</span></a></li>
+                    <li><a href="./?view=factura"><i class='fa fa-check'></i> <span>Facturas</span></a></li>
+                    <!-- <li><a href="./?view=filtroporfecha"><i class='fa fa-check'></i> <span>Reporte Por Fechas</span></a></li> -->
+                    <li><a href="./index.php?view=abono"><i class='fa fa-check'></i> <span>Abono (Pagos)</span></a></li>
+                    <li><a href="./index.php?view=productos"><i class='fa fa-folder'></i> <span>Productos</span></a></li>
+                    <li><a href="./index.php?view=cajachica"><i class='fa fa-money'></i> <span>Caja Chica</span></a></li>
+                    <li><a href="./index.php?view=gastosvarios"><i class='fa fa-money'></i> <span>Gastos Varios</span></a></li>
+                    <li><a href="./index.php?view=cierre"><i class='fa fa-credit-card'></i> <span>Contabilidad</span></a></li>
                   </ul>
                 </li>
 
               <?php if(Core::$user->kind==1):?>
-                
-                <!-- <li><a href="./index.php?view=empleados"><i class='fa fa-users'></i> <span>Empleados</span></a></li> -->
+
+                <li><a href="./index.php?view=empleados"><i class='fa fa-wrench'></i> <span>Empleados</span></a></li>
                 <li><a href="./index.php?view=users"><i class='fa fa-user'></i> <span>Usuarios</span></a></li>
+                    <li><a href="./index.php?view=facturatotal"><i class='fa fa-sitemap'></i> <span>Reportes</span></a></li>
               <?php endif;?>
             <?php endif;?>
 
@@ -252,7 +289,7 @@
 
         <footer class="main-footer">
           <div class="pull-right hidden-xs">
-            
+
           </div>
           <strong>Xport GYM - miguekos1233@gmail.com &copy; 2018</strong>
         </footer>
@@ -260,7 +297,7 @@
 
     <div class="login-box">
       <div class="login-logo">
-        <a href="./">XportGYM<b>ADMIN</a>
+        <a href="./">GYM <b> XPORT</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <form action="./?action=processlogin" method="post">
@@ -280,7 +317,7 @@
           </div>
         </form>
       </div><!-- /.login-box-body -->
-    </div><!-- /.login-box -->  
+    </div><!-- /.login-box -->
 
       <?php endif;?>
 
@@ -305,57 +342,39 @@
     <!-- page script -->
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+
     <script type="text/javascript">
-      $(document).ready(function(){
-        $(".datatable").DataTable({
-          "ordering":true,
-          "language": {
-        "sProcessing":    "Procesando...",
-        "sLengthMenu":    "Mostrar _MENU_ registros",
-        "sZeroRecords":   "No se encontraron resultados",
-        "sEmptyTable":    "Ningún dato disponible en esta tabla",
-        "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix":   "",
-        "sSearch":        "Buscar:",
-        "sUrl":           "",
-        "sInfoThousands":  ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-            "sFirst":    "Primero",
-            "sLast":    "Último",
-            "sNext":    "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-    }
-        });
-      });
-    </script>
-    <script type="text/javascript">
-    function operar(x){
-        var valor_01 = eval(document.getElementById('pago').value);
-        var valor_02 = eval(document.getElementById('monto').value);
-        switch(x){
-            case('sumar'):
-                var resultado = valor_01 + valor_02;
-                break;
-            case('restar'):
-                var resultado = valor_01 - valor_02;
-                break;
-            case('multiplicar'):
-                var resultado = valor_01 * valor_02;
-                break;
-            case('dividir'):
-                var resultado = valor_01 / valor_02;
-                break;
-        }
-        document.getElementById('total').value = resultado;
-    }
+    $(document).ready(function(){
+  $(".datatable").DataTable({
+      // "ordering":true,
+      "order": [[ 0, "desc" ]],
+      "language": {
+          "sProcessing":    "Procesando...",
+          "sLengthMenu":    "Mostrar _MENU_ registros",
+          "sZeroRecords":   "No se encontraron resultados",
+          "sEmptyTable":    "Ningún dato disponible en esta tabla",
+          "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
+          "sInfoPostFix":   "",
+          "sSearch":        "Buscar:",
+          "sUrl":           "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+              "sFirst":    "Primero",
+              "sLast":    "Último",
+              "sNext":    "Siguiente",
+              "sPrevious": "Anterior"
+          },
+          "oAria": {
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+      }
+  });
+
+});
     </script>
 
     <!-- Select2 -->
@@ -375,6 +394,8 @@
     <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <!-- iCheck 1.0.1 -->
     <script src="plugins/iCheck/icheck.min.js"></script>
+    <script src="custom/moment.js"></script>
+    <script type="text/javascript" src="bower_components\bootstrap-datetimepicker\build\js\bootstrap-datetimepicker.min.js"></script>
 
     <script>
     $(function () {
@@ -467,7 +488,8 @@
         // After 3 seconds, remove the show class from DIV
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
+
+        console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
     </script>
   </body>
 </html>
-

@@ -9,7 +9,7 @@ include 'Database.php';
 
 $sql  = "SELECT * FROM membresia";
 $result = mysqli_query($con,$sql);
-        
+
 // $mem = mysqli_fetch_object($membresia);
 
 
@@ -27,7 +27,7 @@ function showUser(str) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
-    } else { 
+    } else {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -69,7 +69,6 @@ function showUser(str) {
                         <div class="panel panel-warning" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: solid orange 1px; border-radius: 5px;">
                         <div class="panel-heading">
                             Datos Personales
-                            
                         </div>
                             <div class="panel-body">
                                 <form>
@@ -83,16 +82,10 @@ function showUser(str) {
                                     </select>
                                 </div>
                                 </form>
-                                
+
                                 <div class="form-group col-lg-12" id="txtHint">
-
-                                        
-
+                                  <!-- Aqui se muestra las membresias -->
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -111,40 +104,18 @@ function showUser(str) {
                                     <input type="text" name="telf" class="form-control" placeholder="Telf">
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label>Razon Social</label>
+                                    <label>Nombre Completo</label>
                                     <input type="text" name="razon_social" class="form-control" placeholder="Razon Social">
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label>Direccion</label>
                                     <input type="text" name="direccion" class="form-control" placeholder="Direccion">
                                 </div>
-                               
-                                <div class="form-group col-lg-6">
-                                    <label>Pago del Cliente*</label>
-                                    <input type="text" name="pago" id="pago" class="form-control" onkeyup="operar('restar');" placeholder="Pago">
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label>Deuda*</label>
-                                    <input type="text" id="total" name="deuda" class="form-control" readonly placeholder="Deuda">
-                                </div>
-                                
-                                <div class="form-group col-lg-6">
-                                    <label>Forma de pago*</label>
-                                    <select name="forma_pago" class="form-control">
-                                        <option value="Efectivo">Efectivo</option>
-                                        <option value="Tarjeta de Cedrito">Tarjeta de Cedrito</option>
-                                        <option value="Tarjeta de Debido">Tarjeta de Debido</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label>Contrato N°:</label>
-                                    <input type="text" name="contrato" required class="form-control" placeholder="Numero de Contrato">
-                                </div>
                                 <div class="form-group col-lg-6">
                                     <label>Boleta N°:</label>
                                     <input type="text" name="boleta" required class="form-control" placeholder="Numero de Boleta">
                                 </div>
-                                
+
                                 <div class="form-group col-lg-6">
                                     <label>Atendido Por:</label>
                                     <input type="text" readonly value="<?php if(isset($_SESSION["user_id"]) ){ echo UserData::getById($_SESSION["user_id"])->name." ";}{ echo UserData::getById($_SESSION["user_id"])->lastname;} ?>" name="atendido" required class="form-control" placeholder="Nombre">
@@ -154,9 +125,10 @@ function showUser(str) {
                                     <textarea name="nota"  class="form-control" placeholder="Nota"></textarea>
                                 </div>
                                 <div class="form-group col-lg-12 text-center">
-                                
+
                                     <button type="submit" onclick="guardar()" class="btn btn-block btn-warning">Agregar</button>
                                 </div>
+                                <input type="hidden" name="update_at" value="<?php echo $date; ?>">
                     </div>
                 </div>
                 <div id="snackbar">Guardado..N° <?php echo $GLOBALS['max_id'] + 1 ?></div>
@@ -171,4 +143,3 @@ function showUser(str) {
                 <!-- /.row -->
 
 </section>
-  

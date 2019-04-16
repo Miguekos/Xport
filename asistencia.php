@@ -6,7 +6,7 @@
 $server = "localhost";
 $name_db = "fitseven_miguel";
 $pass_db = "Alexkos12.";
-$db = "fitseven_lbadmin";
+$db = "fitseven_gymsport";
 
  //Captura el ID
  $q = $_GET["q"];

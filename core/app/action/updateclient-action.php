@@ -12,15 +12,15 @@
 			$p->telf = $_POST["telf"];
 			$p->nombre = $_POST["razon_social"];
 			$p->domicilio = $_POST["direccion"];
-			$p->pago = $_POST["pago"];
+			// $p->pago = $_POST["pago"];
 			$p->monto = $_POST["monto"];
-			$p->deuda = $_POST["deuda"];
-			$p->forma_pago = $_POST["forma_pago"];
-			$p->contrato = $_POST["contrato"];
+			// $p->deuda = $_POST["deuda"];
+			// $p->forma_pago = $_POST["forma_pago"];
+			// $p->contrato = $_POST["contrato"];
 			$p->boleta = $_POST["boleta"];
 			$p->nota = $_POST["nota"];
 			$p->atendido = $_POST["atendido"];
-		
+
 		$p->update();
 
 		// $server = "localhost";
@@ -56,7 +56,7 @@
 		// 	}
 		// }
 
-		
+
 		// if($_POST["password"]!=""){
 		// $p = UserData::getById($_POST["id"]);
 		// $p->password= sha1(md5($_POST["password"]));

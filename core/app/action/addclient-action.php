@@ -17,6 +17,7 @@
 			$p->membresia_c = $_POST["membresia_c"];
 			$p->nombre_mem = $_POST["nombre_mem"];
 			$p->tiempo_mem = $_POST["tiempo_mem"];
+			$p->monto = $_POST["monto"];
 			//$p->precio_mem = $_POST["precio_mem"];
 			$p->fecha_inicio = $_POST["fecha_inicio"];
 			$p->fecha_fin = $_POST["fecha_fin"];
@@ -25,15 +26,10 @@
 			$p->telf = $_POST["telf"];
 			$p->nombre = $_POST["razon_social"];
 			$p->domicilio = $_POST["direccion"];
-			$p->pago = $_POST["pago"];
-			$p->monto = $_POST["monto"];
-			$p->deuda = $_POST["deuda"];
-			$p->forma_pago = $_POST["forma_pago"];
-			$p->contrato = $_POST["contrato"];
 			$p->boleta = $_POST["boleta"];
 			$p->nota = $_POST["nota"];
 			$p->atendido = $_POST["atendido"];
-			
+			$p->update_at = $_POST["update_at"];
 
 #echo "$p->nombre";
 
@@ -55,8 +51,8 @@
 		// $p->image=$imag;
 		$px = $p->add();
 		}else{
-			Core::alert("El correo electronico ya esta en uso!");
+			Core::alert("El DNI ya esta en uso!");
 		}
 
-		Core::redir("./?view=client");
+		Core::redir("./?view=control");
 ?>

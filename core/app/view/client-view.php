@@ -5,10 +5,10 @@ $data["posts"]=ClientData::getAll();
                 <section class="content-header" style="padding-bottom: 10px;">
                   <h1>
                     Clientes
-                    <!-- <a href="./?view=newclient" class="btn btn-success">Agregar</a> -->
+                    <a href="./?view=newclient" class="btn btn-success">Agregar</a>
                   </h1>
                   <ol class="breadcrumb">
-                    <li><a href="./?view=index"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                    <li><a href="./?view=newclient"><i class="fa fa-dashboard"></i> Inicio</a></li>
                     <!-- <li><a href="#">Examples</a></li> -->
                     <li class="active">Clientes</li>
                   </ol>
@@ -16,7 +16,7 @@ $data["posts"]=ClientData::getAll();
                 <!-- Inicio del ROW separa el slide bar del conenido -->
                 <div class="row">
                     <div class="col-lg-12">
-                    
+
                         <div class="box box-warning">
                             <div class="box-body">
                                     <table class="table datatable table-bordered table-hover table-striped">
@@ -29,7 +29,7 @@ $data["posts"]=ClientData::getAll();
                                                 <th class="text-center" style="width: 10%;">Inicio</th>
                                                 <th class="text-center" style="width: 10%;">Expira</th>
                                                 <th class="text-center">Accion</th>
-                                                <!-- <th>Estado</th> -->
+                                                <th class="text-center">Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,18 +57,19 @@ $data["posts"]=ClientData::getAll();
                                                 <td class="text-center"><?php echo date_format($fecha_fin,"d/m/Y"); ?></td>
                                                 <td class="text-center" style="width:100px;">
                                                 <a href="./?view=editclient&id=<?=$post->id;?>" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></a>
-                                                <!-- <a href="./?action=delclient&id=<?=$post->id;?>" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a> -->
+                                                <!-- <a onclick="borrar(<?=$post->id;?>)" href="./?action=delclient&id=<?=$post->id;?>" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a> -->
+                                                <a onclick="borrar(<?=$post->id;?>)" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a>
                                                 </td>
-                                                
+
                                                 <?php
                                                     $color = 'btn-success';
                                                     if ($gymxd >= 1) {
                                                         //echo "$fecha";
-                                                        $color = 'text-center btn btn-xs btn-primary';                        
+                                                        $color = 'text-center btn btn-xs btn-primary';
                                                     }
                                                     elseif ($GLOBALS['fecha2'] > $asd1 and $GLOBALS['fecha3'] >= $mes and $GLOBALS['fecha4'] >= $ano) {
                                                         //echo "$fecha";
-                                                        $color = 'text-center btn btn-xs btn-danger'; 
+                                                        $color = 'text-center btn btn-xs btn-danger';
                                                     }
                                                     elseif ($GLOBALS['fecha4'] > $ano) {
                                                         //echo "$fecha";
@@ -76,15 +77,17 @@ $data["posts"]=ClientData::getAll();
                                                     }
                                                     elseif ($GLOBALS['fecha2'] >= $asd and $GLOBALS['fecha3'] >= $mes and $GLOBALS['fecha4'] >= $ano) {
                                                         //codigo
-                                                        $color = 'text-center btn btn-xs btn-warning';                        
+                                                        $color = 'text-center btn btn-xs btn-warning';
                                                     }
                                                     else {
                                                         $color = 'text-center btn btn-xs btn-success';
                                                     }
+                                                    
                                                 ?>
-    <!--                                             <td class="text-center" style="width: 90px;"><a class="<?php echo $color; ?>">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a></td> -->
-
+                                                 
+                                                 <td class="text-center" style="width: 90px;"><a class="<?php echo $color; ?>">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a></td> 
                                             </tr>
+                                            
                                         <?php endforeach;?>
                                         </tbody>
                                     </table>
@@ -94,3 +97,15 @@ $data["posts"]=ClientData::getAll();
                 </div>
                 <!-- /.row -->
                 </section>
+              
+<script>
+function borrar (id){
+    console.log(id);
+    var respuesta = confirm("Estas seguro que quieres elminar..??");
+    if (respuesta) {
+        // window.location.href = "./?action=delclient&id=" . id;
+        window.location.href = `./?action=delclient&id=${id}`;
+    }
+}
+
+</script>

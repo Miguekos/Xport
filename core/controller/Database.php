@@ -3,8 +3,8 @@ class Database {
 	public static $db;
 	public static $con;
 	function __construct(){
-		$this->user="root";$this->pass="";$this->host="localhost";$this->ddbb="xport";
-		// $this->user="id1372451_root";$this->pass="1234567890";$this->host="localhost";$this->ddbb="id1372451_lbadmin";
+		// $this->user="fitseven_miguel";$this->pass="Alexkos12.";$this->host="localhost";$this->ddbb="fitseven_ventasgym";
+		$this->user="root";$this->pass="";$this->host="localhost";$this->ddbb="fitseven_ventasgym";
 	}
 
 	function connect(){

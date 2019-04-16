@@ -2,3 +2,5 @@
 RewriteEngine on
 
 RewriteOptions inherit
+
+SetEnv TZ America/Lima

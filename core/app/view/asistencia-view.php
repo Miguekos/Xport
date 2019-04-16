@@ -1,3 +1,4 @@
+
 <section class="content" style="padding-top: 0px; padding-bottom: 0px;">
         <section class="content-header" style="padding-bottom: 10px;">
           <h1>
@@ -17,7 +18,7 @@
                     <div class="box-body">
                       <div class="panel" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: solid orange 1px; border-radius: 5px;">
                       <div class="panel-heading">
-                           <input type="search" autofocus id="myInput" class="txthotelname form-control" placeholder="ID o DNI...">
+                           <input type="search" autofocus id="myInput" class="txthotelname form-control" placeholder="DNI">
                       </div>
                           <div class="panel-body">
                               <div class="form-group col-lg-12">

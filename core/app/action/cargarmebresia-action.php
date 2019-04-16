@@ -18,41 +18,46 @@
     <body>
 
     <?php
+    date_default_timezone_set('America/Lima');
     $q = intval($_GET['q']);
-    
-
-    $con = mysqli_connect('localhost','root','','xport');
-    if (!$con) {
-        die('Could not connect: ' . mysqli_error($con));
-    }
-
+    include 'Database.php';
     mysqli_select_db($con,"ajax_demo");
     $sql="SELECT * FROM membresia WHERE id = '".$q."'";
     $result = mysqli_query($con,$sql);
-    date_default_timezone_set('America/Lima');
 
-    
-    echo "<table class='table datatable table-bordered table-hover table-striped'>
-    <tr>
-    <th>Nombre</th>
-    <th>Dias</th>
-    <th>Precio</th>
-    </tr>";
+
+
+
+
     while($row = mysqli_fetch_array($result)) {
-        echo "<tr>";
-        echo "<td> <input type='text' readonly id='nombre_mem' name='nombre_mem' class='form-control' value='" . $row['nombre'] . "' ></td>";
-        echo "<td> <input type='text' readonly id='tiempo_mem' name='tiempo_mem' class='form-control' value='" . $row['tiempo_de_la_membresia'] . "' ></td>";
-        echo "<td> <input type='text' readonly id='monto' name='monto' class='form-control' value='" . $row['precio'] . "' ></td>";
-        echo "</tr>";
+
+        echo"
+
+
+            <label>Nombre de la Membresia</label>
+            <input type='text' readonly id='nombre_mem' name='nombre_mem' class='form-control' value='" . $row['nombre'] . "' >
+
+
+            <label>Dias</label>
+            <input type='text' readonly id='tiempo_mem' name='tiempo_mem' class='form-control' value='" . $row['tiempo_de_la_membresia'] . "' >
+
+
+            <label>Precio</label>
+            <input type='text' readonly id='monto' name='monto' class='form-control' value='" . $row['precio'] . "' >
+            <input type='hidden' readonly name='deuda' class='form-control' value='" . $row['precio'] . "' >
+
+
+         ";
+
     }
-    echo "</table>";
+
 
     mysqli_select_db($con,"ajax_demo");
     $sql="SELECT * FROM membresia WHERE id = '".$q."'";
     $result = mysqli_query($con,$sql);
     $filas = mysqli_fetch_array($result);
     //$dias_mem = "+".$filas['tiempo_de_la_membresia']." days";
-   
+
     //$fechaSum = date("Y-m-d");
     //$nuevafecha = strtotime ( '+30 day' , strtotime ( $fechaSum ) ) ;
     //$nuevafecha1 = strtotime ( "+".$filas['tiempo_de_la_membresia']." days" , strtotime ( $fechaSum ) ) ;
@@ -63,9 +68,9 @@
     //sumo 1 día
     $dias_mem = "+ ". $filas['tiempo_de_la_membresia'] ." days";
     //echo "DIASSSS" . $dias_mem;
-    $fecha_fin = date("Y-m-d",strtotime($fecha_actual."$dias_mem")); 
+    $fecha_fin = date("Y-m-d",strtotime($fecha_actual."$dias_mem"));
     //resto 1 día
-    $fecha_alert = date("Y-m-d",strtotime($fecha_fin."- 15 days")); 
+    $fecha_alert = date("Y-m-d",strtotime($fecha_fin."- 15 days"));
 
     echo "
 
@@ -78,8 +83,8 @@
 
 
     ";
-    
-    
+
+
     mysqli_close($con);
     ?>
 

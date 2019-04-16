@@ -43,12 +43,12 @@ $user = UserData::getById($_GET["id"]);
                                 <label>Apellidos</label>
                                 <input type="text" name="lastname" value="<?=$user->lastname;?>" class="form-control" placeholder="Apellidos">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Nombre de usuario</label>
                                 <input type="text" name="username" value="<?=$user->username;?>" class="form-control" placeholder="Nombre de usuario" required>
-                            </div>
+                            </div> -->
                             <div class="form-group">
-                                <label>Email</label>
+                                <label>Nombre de usuario</label>
                                 <input type="text" name="email" value="<?=$user->email;?>" class="form-control" placeholder="Email">
                             </div>
                             <div class="form-group">

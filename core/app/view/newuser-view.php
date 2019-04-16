@@ -5,17 +5,6 @@
                         <h1 class="page-header">
                             Nuevo usuario
                         </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                  <a href="./?view=index"><i class="fa fa-dashboard"></i> Dashboard</a>
-                            </li>
-                            <li>
-                                  <a href="./?view=users"><i class="fa fa-users"></i> Usuarios</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-asterisk"></i> Nuevo usuario
-                            </li>
-                        </ol>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -24,10 +13,7 @@
                     <div class="col-lg-8">
 
                         <form role="form" method="post" action="./?action=adduser" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label>Imagen (480x480)</label>
-                                <input type="file" name="image">
-                            </div>
+                            
                             <div class="form-group">
                                 <label>Nombre</label>
                                 <input type="text" name="name" class="form-control" placeholder="Nombre">
@@ -36,10 +22,10 @@
                                 <label>Apellidos</label>
                                 <input type="text" name="lastname" class="form-control" placeholder="Apellidos">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Email</label>
                                 <input type="text" name="username" class="form-control" placeholder="Email">
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label>Nombre de usuario</label>
                                 <input type="text" name="email" class="form-control" placeholder="Nombre de usuario" required>

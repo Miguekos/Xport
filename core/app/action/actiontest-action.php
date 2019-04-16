@@ -1,65 +1,36 @@
 <?php
 
-		$p = ClientData::getById($_POST["id"]);
-		$p->nombre = $_POST["nombre"];
-		$p->apellido = $_POST["apellido"];
-		$p->fecha_inicio = $_POST["fecha_inicio"];
-		$p->fecha_fin = $_POST["fecha_fin"];
-        $p->nota = $_POST["nota"];
-		$p->atendido = $_POST["atendido"];        
-        //Monto a pagar
-            $p->monto = $_POST["monto"];
-        
-        $abono = $_POST["abono"];
-        //echo $abono;
-        $p->pago = $_POST["pago"]+$abono;
-        $p->deuda = $p->monto-$p->pago;
+include ('Database.php');
 
-		$p->update_control();
-
-		// $server = "localhost";
-		// $name_db = "root";
-		// $pass_db = "";
-		// $db = "lbadmin";
-
-		// $conexion = new mysqli($server,$name_db,$pass_db,$db);
+			$id_cliente = $_POST["id_cliente"];
+			$id_abono = $_POST["id_abono"];
+			$nombre = $_POST["nombre"];
+			$dni = $_POST["dni"];
+			$fecha_fin = $_POST["fecha_fin"];
+			$abono = $_POST["abono"];
+			$total = $_POST["total"];
+			$nota = $_POST["nota"];
+			$fecha_abono = $_POST["fecha_abono"];
 
 
-		// $query  = "TRUNCATE person";
-		// $resultado = $conexion -> query($query);
+			$deuda1 = $_POST["deuda"];
 
-		// $query1  = "INSERT INTO person (id, name, lastname, dni, deuda, c2_note) SELECT id, nombre, apellido, dni, deuda, nota FROM cliente";
-		// $resultado1 = $conexion -> query($query1);
-		// $prueba = $_POST["monto"];
-		// echo "$prueba";
-		// sleep(3)
+			// $monto = $_POST["monto"];
+
+			$deuda = $deuda1 - $abono;
 
 
-		#print_r($p)
-		#echo "$p->nombre";
-
-		// if(isset($_FILES["image"])){
-		// 	$image=new Upload($_FILES["image"]);
-		// 	if($image->uploaded){
-		// 		$image->Process("storage/images/");
-		// 		if($image->processed){
-		// 			$p = UserData::getById($_POST["id"]);
-		// 			$p->image=$image->file_dst_name;
-		// 			$p->update_img();
-		// 		}
-		// 	}
-		// }
-
-		
-		// if($_POST["password"]!=""){
-		// $p = UserData::getById($_POST["id"]);
-		// $p->password= sha1(md5($_POST["password"]));
-		// $p->update_passwd();
-
-		// }
+			//echo $deuda;
 
 
+			$sql = "INSERT INTO abonos (id_cliente, id_abono, nombre, dni, fecha_fin, abono, total, deuda, nota, fecha_abono) VALUES ('$id_cliente','$id_abono', '$nombre', '$dni', '$fecha_fin', '$abono', '$total', '$deuda', '$nota', '$fecha_abono')";
+    	//echo $sql;
+			//echo "<br>";
+			$abonar = mysqli_query($con,$sql);
+			$deuda_c = "update cliente set deuda = $deuda where id = $id_cliente";
+			$deuda_c = mysqli_query($con,$deuda_c);
+			//echo $deuda_c;
 
-		#Core::redir("./?view=editclient&id=".$_POST["id"]);
-		Core::redir("./?view=control");
+
+			Core::redir("./?view=abono");
 ?>

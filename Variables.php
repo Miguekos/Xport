@@ -3,7 +3,7 @@
 $server = "localhost";
 $name_db = "fitseven_miguel";
 $pass_db = "Alexkos12.";
-$db = "fitseven_lbadmin";
+$db = "fitseven_gymsport";
 
 $conexion = new mysqli($server,$name_db,$pass_db,$db);
 // Array with names
